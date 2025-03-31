@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Evaluator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 to-orange-300">
+
+    <div class="bg-white p-8 rounded-3xl shadow-lg w-full max-w-sm transform transition duration-300 hover:scale-105">
+        <h1 class="text-3xl font-semibold text-gray-800 text-center mb-6">Arithmetic Evaluator</h1>
+
+        <input 
+            type="text" 
+            id="expression" 
+            placeholder="e.g., 5 + 3 * 2"
+            class="w-full p-4 border-2 border-gray-300 rounded-xl text-lg text-gray-700 mb-4 focus:outline-none focus:ring-2 focus:ring-pink-400"
+        />
+
+        <button 
+            onclick="evaluateExpression()" 
+            class="w-full bg-pink-400 text-white py-3 rounded-xl text-lg font-medium transition duration-200 hover:bg-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500">
+            Evaluate
+        </button>
+
+        <p id="error" class="text-red-500 mt-4 text-center"></p>
+        <p id="result" class="text-pink-500 font-semibold mt-4 text-center"></p>
+    </div>
+
+    <script>
+        function evaluateExpression() {
+            const expression = document.getElementById("expression").value;
+            const errorElement = document.getElementById("error");
+            const resultElement = document.getElementById("result");
+
+            try {
+                if (!expression.trim()) {
+                    errorElement.textContent = "Please enter an expression.";
+                    resultElement.textContent = "";
+                    return;
+                }
+                
+                const result = new Function(`return (${expression})`)();
+                resultElement.textContent = `Result: ${result}`;
+                errorElement.textContent = "";
+            } catch (err) {
+                errorElement.textContent = "Invalid expression. Please check your input.";
+                resultElement.textContent = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
