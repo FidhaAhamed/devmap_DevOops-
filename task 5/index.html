@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-400 via-pink-300 to-purple-400">
+
+  <div class="backdrop-blur-md bg-white/30 border border-white/40 shadow-2xl rounded-xl p-6 w-full max-w-md text-gray-800">
+    <h2 class="text-3xl font-bold text-center mb-6">✨ Task List</h2>
+    
+    <div class="flex gap-2 mb-4">
+      <input 
+        type="text" 
+        id="taskInput" 
+        placeholder="Enter a task"
+        class="flex-grow px-4 py-2 rounded-lg bg-white/60 text-gray-800 placeholder-gray-600 border border-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      />
+      <button 
+        onclick="addTask()"
+        class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-all duration-300"
+      >
+        Add
+      </button>
+    </div>
+
+    <ul id="taskList" class="space-y-2">
+      
+    </ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const task = input.value.trim();
+
+      if (task !== "") {
+        const li = document.createElement('li');
+        li.className = "bg-white/60 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm";
+        li.textContent = task;
+
+        document.getElementById('taskList').appendChild(li);
+        input.value = "";
+      } else {
+        alert("Please enter a task!");
+      }
+    }
+  </script>
+</body>
+</html>
